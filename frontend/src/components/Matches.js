@@ -52,7 +52,7 @@ function Matches({ user }) {
       ) : (
         <div className="matches-grid">
           {matches.map((match, index) => (
-            <div key={`${match.id}-${match.game_id}-${index}`} className="match-item">
+            <div key={`${match.id}-${match.game_id}`} className="match-item">
               <div className="match-item-header">
                 <div className="match-avatar-small">👤</div>
                 <div className="match-info">

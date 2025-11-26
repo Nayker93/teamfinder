@@ -2,14 +2,40 @@ const express = require('express');
 const cors = require('cors');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
+const rateLimit = require('express-rate-limit');
 const db = require('./database');
 
 const app = express();
 const PORT = process.env.PORT || 3001;
-const JWT_SECRET = process.env.JWT_SECRET || 'teamfinder-secret-key';
+const JWT_SECRET = process.env.JWT_SECRET;
+if (!JWT_SECRET) {
+  console.warn('WARNING: JWT_SECRET environment variable is not set. Using a random secret for development only.');
+}
+const jwtSecret = JWT_SECRET || require('crypto').randomBytes(32).toString('hex');
 
 app.use(cors());
 app.use(express.json());
+
+// Rate limiting middleware
+const limiter = rateLimit({
+  windowMs: 15 * 60 * 1000, // 15 minutes
+  max: 100, // Limit each IP to 100 requests per windowMs
+  standardHeaders: true,
+  legacyHeaders: false,
+  message: { error: 'Too many requests, please try again later.' }
+});
+
+// Stricter rate limit for authentication endpoints
+const authLimiter = rateLimit({
+  windowMs: 15 * 60 * 1000, // 15 minutes
+  max: 10, // Limit each IP to 10 auth requests per windowMs
+  standardHeaders: true,
+  legacyHeaders: false,
+  message: { error: 'Too many authentication attempts, please try again later.' }
+});
+
+// Apply general rate limiting to all requests
+app.use(limiter);
 
 // Middleware to verify JWT token
 function authenticateToken(req, res, next) {
@@ -20,7 +46,7 @@ function authenticateToken(req, res, next) {
     return res.status(401).json({ error: 'Access token required' });
   }
 
-  jwt.verify(token, JWT_SECRET, (err, user) => {
+  jwt.verify(token, jwtSecret, (err, user) => {
     if (err) {
       return res.status(403).json({ error: 'Invalid token' });
     }
@@ -30,7 +56,7 @@ function authenticateToken(req, res, next) {
 }
 
 // Register a new user
-app.post('/api/register', async (req, res) => {
+app.post('/api/register', authLimiter, async (req, res) => {
   try {
     const { username, email, password, discord_username, games } = req.body;
 
@@ -57,7 +83,7 @@ app.post('/api/register', async (req, res) => {
       }
     }
 
-    const token = jwt.sign({ id: userId, username }, JWT_SECRET, { expiresIn: '7d' });
+    const token = jwt.sign({ id: userId, username }, jwtSecret, { expiresIn: '7d' });
 
     res.status(201).json({ 
       message: 'User registered successfully',
@@ -73,7 +99,7 @@ app.post('/api/register', async (req, res) => {
 });
 
 // Login
-app.post('/api/login', async (req, res) => {
+app.post('/api/login', authLimiter, async (req, res) => {
   try {
     const { email, password } = req.body;
 
@@ -92,7 +118,7 @@ app.post('/api/login', async (req, res) => {
       return res.status(401).json({ error: 'Invalid credentials' });
     }
 
-    const token = jwt.sign({ id: user.id, username: user.username }, JWT_SECRET, { expiresIn: '7d' });
+    const token = jwt.sign({ id: user.id, username: user.username }, jwtSecret, { expiresIn: '7d' });
 
     res.json({ 
       token,
