@@ -39,9 +39,9 @@
 
 ---
 
-## 🚀 **Démarrage Ultra-Rapide** (3 min)
+## 🚀 **Démarrage Rapide**
 
-### ✅ **Prérequis** (Installer une fois)
+### ✅ **Prérequis**
 
 🔧 Node.js 18+ → https://nodejs.org
 🐳 Docker Desktop → https://docker.com
@@ -49,7 +49,7 @@
 📦 Git → git-scm.com
 
 
-### 🎬 **Commandes Complètes** (Copier-coller)
+### 🎬 **Commandes Complètes**
 
 ```bash
 # 1. Cloner le projet
@@ -70,3 +70,4 @@ cd ../backend
 npm install
 npm run dev
 # → http://localhost:3001/api/health
+```
