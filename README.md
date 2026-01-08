@@ -52,6 +52,10 @@
 ### 🎬 **Commandes Complètes**
 
 ```bash
+
+# Pour lancer avec le script en une commande
+./start.sh
+
 # 1. Cloner le projet
 git clone https://github.com/VOTRE_USERNAME/teamfinder-app.git
 cd teamfinder-app
