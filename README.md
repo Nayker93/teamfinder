@@ -1,6 +1,5 @@
-<div align="center">
-
 # 🎮 **TeamFinder**
+
 [![React](https://img.shields.io/badge/React-18.2-blue?style=for-the-badge&logo=react)](https://react.dev)
 [![Node.js](https://img.shields.io/badge/Node-20-green?style=for-the-badge&logo=node.js)](https://nodejs.org)
 [![PostgreSQL](https://img.shields.io/badge/PostgreSQL-15-violet?style=for-the-badge&logo=postgresql)](https://postgresql.org)
@@ -10,8 +9,6 @@
 **Plateforme de matchmaking gaming**  
 *Trouvez vos coéquipiers parfaits selon votre niveau et vos jeux préférés*  
 🤝 **Comme Tinder, mais pour LoL, Rocket League, Valorant...**
-
-</div>
 
 ## 📱 **Présentation de l'Application**
 
@@ -27,12 +24,14 @@
 
 
 ### 🎮 **Exemple d'utilisation**
+
 1. **Inscription** → Ajouter LoL (Gold 2) + Rocket League (Champion)
 2. **Découverte** → Voir profils compatibles (Gold/Diamond)
 3. **Like** → Si match mutuel → **Discord échangé !**
 4. **Jouer** → Victoire garantie avec coéquipier adapté 🎉
 
 ### 📊 **Objectif Projet**
+
 👥 Équipe : 4 étudiants ESIEE PARIS B3
 🎓 Projet tutoré "Matchmaking Jeux Vidéo"
 🚀 MVP : En cours
@@ -43,11 +42,10 @@
 
 ### ✅ **Prérequis**
 
-🔧 Node.js 18+ → https://nodejs.org
-🐳 Docker Desktop → https://docker.com
+🔧 Node.js 18+ → [https://nodejs.org]
+🐳 Docker Desktop → [https://docker.com]
 💻 VSCode + extensions → React, Tailwind CSS IntelliSense
 📦 Git → git-scm.com
-
 
 ### 🎬 **Commandes Complètes**
 
