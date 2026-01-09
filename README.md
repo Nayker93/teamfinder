@@ -22,7 +22,6 @@
 💬 Échange Discord après match confirmé
 ⚡ Temps réel (notifications matchs)
 
-
 ### 🎮 **Exemple d'utilisation**
 
 1. **Inscription** → Ajouter LoL (Gold 2) + Rocket League (Champion)
